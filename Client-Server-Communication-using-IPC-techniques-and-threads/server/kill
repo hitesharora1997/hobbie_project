@@ -1,0 +1,5 @@
+#! /bin/bash
+ipcrm -a
+unlink reqfifo
+killall -9 rc1 rc2 rc3 rc4
+killall -9 adder subtractor multiplier modulus
