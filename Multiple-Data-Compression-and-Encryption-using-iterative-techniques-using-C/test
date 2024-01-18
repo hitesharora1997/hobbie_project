@@ -1,0 +1,49 @@
+#! /bin/bash
+
+echo "do you want to check-in files is RCS (y/n)"
+read resp
+
+if [ $resp = y ]
+then
+	for file in $(ls *.h) $(ls *.c)
+	do 
+		ci $file
+	done
+fi
+
+echo "do you want to check-out files from RCS (y/n)"
+read resp
+
+if [ $resp = y ]
+then
+	for file in $(ls *.h,v) $(ls *.c,v)
+	do 
+		co $file
+	done
+fi
+
+
+if ( make )
+then 
+	echo "do you want to RUN PROGRAM (y/n)"
+	read resp		
+		if [ $resp = y ]
+		then
+			./mdc
+		fi
+else 
+	echo "make FAILED"
+fi
+
+
+
+echo "do you want to LOCK FILES (y/n)"
+read resp
+
+if [ $resp = y ] 
+then
+	for file in $(ls *.h,v) $(ls *.c,v)
+	do 
+		co -l $file
+	done
+fi
